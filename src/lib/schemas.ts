@@ -5,11 +5,11 @@ export const toolEntrySchema = z.object({
   name: z.string().min(1, "Tool name is required"),
   plan: z.string().min(1, "Plan is required"),
   monthlySpend: z
-    .number({ invalid_type_error: "Enter a valid number" })
+    .number({ error: "Enter a valid number" })
     .min(0, "Spend cannot be negative")
     .max(100000, "That seems too high — double-check your number"),
   seats: z
-    .number({ invalid_type_error: "Enter a valid number" })
+    .number({ error: "Enter a valid number" })
     .int("Seats must be a whole number")
     .min(1, "At least 1 seat required")
     .max(10000, "Enter a realistic seat count"),
@@ -32,7 +32,7 @@ export const auditFormSchema = z.object({
     .min(1, "Company name is required")
     .max(100, "Keep it under 100 characters"),
   teamSize: z
-    .number({ invalid_type_error: "Enter a valid number" })
+    .number({ error: "Enter a valid number" })
     .int()
     .min(1, "Team size must be at least 1")
     .max(100000, "Enter a realistic team size"),
