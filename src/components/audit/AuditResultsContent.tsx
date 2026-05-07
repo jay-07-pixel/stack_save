@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, startTransition } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { AuditResultsDashboard } from "./AuditResultsDashboard";
 import { Button } from "@/components/ui/button";
@@ -18,25 +18,7 @@ export function AuditResultsContent() {
     "loading" | "done" | "failed"
   >("loading");
 
-  useEffect(() => {
-    const stored = sessionStorage.getItem("stacksave_current_audit");
-    if (stored) {
-      try {
-        const parsed: AuditResult = JSON.parse(stored);
-        setResult(parsed);
-        fetchAiSummary(parsed);
-      } catch {
-        router.replace("/audit");
-      }
-    } else if (auditId) {
-      fetchFromFirestore(auditId);
-    } else {
-      router.replace("/audit");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function fetchAiSummary(auditResult: AuditResult) {
+  const fetchAiSummary = useCallback(async (auditResult: AuditResult) => {
     try {
       const res = await fetch("/api/ai-summary", {
         method: "POST",
@@ -47,32 +29,56 @@ export function AuditResultsContent() {
       if (res.ok) {
         const data = await res.json();
         if (data.summary) {
-          setResult((prev) =>
-            prev ? { ...prev, aiSummary: data.summary } : prev
-          );
+          startTransition(() => {
+            setResult((prev) =>
+              prev ? { ...prev, aiSummary: data.summary } : prev
+            );
+          });
         }
       }
     } catch {
       // Non-critical — results are shown without summary
     } finally {
-      setAiSummaryStatus("done");
+      startTransition(() => setAiSummaryStatus("done"));
     }
-  }
+  }, []);
 
-  async function fetchFromFirestore(slug: string) {
-    try {
-      const res = await fetch(`/api/audit/${slug}`);
-      if (res.ok) {
-        const data = await res.json();
-        setResult(data.audit);
-        setAiSummaryStatus("done");
-      } else {
+  const fetchFromFirestore = useCallback(
+    async (slug: string) => {
+      try {
+        const res = await fetch(`/api/audit/${slug}`);
+        if (res.ok) {
+          const data = await res.json();
+          startTransition(() => {
+            setResult(data.audit);
+            setAiSummaryStatus("done");
+          });
+        } else {
+          router.replace("/audit");
+        }
+      } catch {
         router.replace("/audit");
       }
-    } catch {
+    },
+    [router]
+  );
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("stacksave_current_audit");
+    if (stored) {
+      try {
+        const parsed: AuditResult = JSON.parse(stored);
+        startTransition(() => setResult(parsed));
+        void fetchAiSummary(parsed);
+      } catch {
+        router.replace("/audit");
+      }
+    } else if (auditId) {
+      void fetchFromFirestore(auditId);
+    } else {
       router.replace("/audit");
     }
-  }
+  }, [auditId, fetchAiSummary, fetchFromFirestore, router]);
 
   if (!result) {
     return (

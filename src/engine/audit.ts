@@ -13,7 +13,6 @@ import { generateSlug } from "@/utils";
 const TEAM_PLAN_OVERKILL_SEAT_THRESHOLD = 3;
 const HIGH_SPEND_PER_SEAT_THRESHOLD = 40; // USD/month
 const API_SWITCH_MIN_SPEND = 100; // only recommend API if paying $100+/mo
-const DUPLICATE_SIMILARITY_THRESHOLD = 2; // tools in same category
 
 // ─── Recommendation Rules ──────────────────────────────────────────────────
 
@@ -55,7 +54,7 @@ function analyzeTeamPlanOverkill(
 
     return {
       type: "downgrade" as RecommendationType,
-      reason: `You're on a ${teamPlan.name} plan with only ${tool.seats} seat${tool.seats > 1 ? "s" : ""}. The ${individualPlan.name} plan at $${individualPlan.monthlyPerSeat}/seat covers the same core features for small teams.`,
+      reason: `You're on a ${teamPlan.name} plan with only ${tool.seats} seat${tool.seats > 1 ? "s" : ""} (you reported ${teamSize} people in the org). The ${individualPlan.name} plan at $${individualPlan.monthlyPerSeat}/seat covers the same core features for small teams when admin controls aren't required.`,
       estimatedMonthlySavings: savings,
       confidence: "high",
       actionItems: [

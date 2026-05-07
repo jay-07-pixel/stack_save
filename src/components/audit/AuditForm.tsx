@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useCallback, useEffect, startTransition } from "react";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, ArrowRight, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,10 +64,15 @@ export function AuditForm({ onSubmit, isLoading = false }: AuditFormProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Persist to localStorage on change
-  const watchedValues = form.watch();
+  const watchedValues = useWatch({
+    control: form.control,
+    defaultValue: DEFAULT_FORM_VALUES,
+  }) as AuditFormSchema;
+
   useEffect(() => {
-    setSavedFormData(watchedValues);
+    startTransition(() => {
+      setSavedFormData(watchedValues);
+    });
   }, [watchedValues, setSavedFormData]);
 
   const handleAddTool = useCallback(() => {
