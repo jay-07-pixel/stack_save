@@ -76,24 +76,24 @@ export function AuditResultsContent() {
 
   if (!result) {
     return (
-      <main className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-center justify-center py-24">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-900 dark:border-zinc-700 dark:border-t-white" />
-          <p className="text-sm text-zinc-500">Loading your audit...</p>
+          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-muted border-t-foreground" />
+          <p className="text-sm text-muted-foreground">Loading your audit...</p>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="flex-1">
+    <div className="flex-1">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Button
             asChild
             variant="ghost"
             size="sm"
-            className="mb-4 -ml-2 gap-1.5 text-zinc-400"
+            className="mb-4 -ml-2 gap-1.5 text-muted-foreground"
           >
             <Link href="/audit">
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
@@ -102,10 +102,10 @@ export function AuditResultsContent() {
           </Button>
 
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground">
               Audit results
             </h1>
-            <div className="text-sm text-zinc-400">
+            <div className="text-sm text-muted-foreground">
               {result.formData.companyName} ·{" "}
               {new Date(result.createdAt).toLocaleDateString("en-US", {
                 month: "long",
@@ -116,8 +116,8 @@ export function AuditResultsContent() {
           </div>
 
           {aiSummaryStatus === "loading" && !result.aiSummary && (
-            <div className="mt-3 flex items-center gap-2 text-sm text-zinc-400">
-              <span className="h-3 w-3 animate-spin rounded-full border border-zinc-300 border-t-zinc-600" />
+            <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="h-3 w-3 animate-spin rounded-full border border-muted border-t-foreground" />
               Generating AI summary...
             </div>
           )}
@@ -125,6 +125,6 @@ export function AuditResultsContent() {
 
         <AuditResultsDashboard result={result} />
       </div>
-    </main>
+    </div>
   );
 }

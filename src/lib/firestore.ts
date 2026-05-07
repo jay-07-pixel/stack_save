@@ -7,7 +7,7 @@ import {
   increment,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "@/services/firebase";
 import { AuditDocument, AuditResult } from "@/types";
 
 const AUDITS_COLLECTION = "audits";

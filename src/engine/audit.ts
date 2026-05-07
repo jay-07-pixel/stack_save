@@ -6,7 +6,7 @@ import {
   RecommendationType,
 } from "@/types";
 import { findKnownTool } from "@/config/tools";
-import { generateSlug } from "@/lib/utils";
+import { generateSlug } from "@/utils";
 
 // ─── Rule Thresholds ───────────────────────────────────────────────────────
 
