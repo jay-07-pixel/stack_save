@@ -69,7 +69,7 @@ export function RecommendationCard({ recommendation: rec }: RecommendationCardPr
     >
       <div className={cn("flex gap-0")}>
         {/* Left accent bar */}
-        <div className={cn("w-1 flex-shrink-0", config.borderColor.replace("border-l-", "bg-"))} />
+        <div className={cn("w-1 shrink-0", config.borderColor.replace("border-l-", "bg-"))} />
 
         <div className="flex-1 p-5">
           {/* Header */}
@@ -114,7 +114,7 @@ export function RecommendationCard({ recommendation: rec }: RecommendationCardPr
               <ul className="space-y-1.5">
                 {rec.actionItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                    <ArrowRight className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-500" aria-hidden="true" />
+                    <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" aria-hidden="true" />
                     {item}
                   </li>
                 ))}

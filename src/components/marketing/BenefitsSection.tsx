@@ -14,7 +14,7 @@ export function BenefitsSection() {
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="benefits-heading"
-            className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl [letter-spacing:var(--tracking-tight)]"
+            className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
           >
             Why teams run StackSave before renewals
           </h2>

@@ -17,7 +17,7 @@ export function CtaFooterSection() {
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="cta-heading"
-            className="text-3xl font-semibold tracking-tight sm:text-4xl [letter-spacing:var(--tracking-tight)] text-white"
+            className="text-3xl font-semibold tracking-tight sm:text-4xl text-white"
           >
             {landingCta.title}
           </h2>

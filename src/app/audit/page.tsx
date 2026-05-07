@@ -41,7 +41,7 @@ export default function AuditPage() {
   return (
     <Container size="default" className="max-w-4xl py-12 sm:py-16">
       <div className="mb-10">
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl [letter-spacing:var(--tracking-tight)]">
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           Audit your AI spend
         </h1>
         <p className="mt-3 text-muted-foreground">

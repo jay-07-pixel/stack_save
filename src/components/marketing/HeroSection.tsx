@@ -20,7 +20,7 @@ export function HeroSection() {
             <Zap className="h-3 w-3 text-accent" aria-hidden />
             {landingHero.eyebrow}
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl [letter-spacing:var(--tracking-tight)]">
+          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             {landingHero.titleLine1}
             <br />
             <span className="text-accent">{landingHero.titleHighlight}</span>

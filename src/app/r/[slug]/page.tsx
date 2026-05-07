@@ -69,7 +69,7 @@ export default async function SharedReportPage({ params }: PageProps) {
       </div>
 
       <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground [letter-spacing:var(--tracking-tight)]">
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground">
           Audit results
         </h1>
         <div className="text-sm text-muted-foreground">

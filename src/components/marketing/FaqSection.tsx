@@ -16,7 +16,7 @@ export function FaqSection() {
       <Container size="narrow">
         <h2
           id="faq-heading"
-          className="text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl [letter-spacing:var(--tracking-tight)]"
+          className="text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
         >
           Frequently asked questions
         </h2>
